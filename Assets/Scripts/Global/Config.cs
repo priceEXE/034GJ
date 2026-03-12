@@ -4,17 +4,17 @@ using UnityEngine;
 using Gameplay;
 public class Config
 {
-    public static Dictionary<string,NodeInfo> prefabsPath = new Dictionary<string, NodeInfo>()
+    public static Dictionary<string,NodeInfo> infoPath = new Dictionary<string, NodeInfo>()
     {
-        {GraphicStyle.None.ToString() + GraphicStyle.None.ToString() + GraphicStyle.None.ToString(), new NodeInfo { PrefabPath = null, AudioPath = null }},
-        {GraphicStyle.Circle.ToString(), new NodeInfo { PrefabPath = "Prefabs/Tester", AudioPath = "Audio/Tester" }},
+        {GraphicStyle.Circle.ToString(), new NodeInfo { spritePath = "Sprites/Circle", audioPath = "Audio/Circle" }},
+        {GraphicStyle.Circle.ToString() + GraphicStyle.Triangle.ToString(), new NodeInfo { spritePath = "Sprites/Circle_Triangle", audioPath = "Audio/Circle_Triangle" }},
     };
 }
 
 public struct NodeInfo
 {
-    public string PrefabPath;
-    public string AudioPath;
+    public string spritePath;
+    public string audioPath;
 
 }
     

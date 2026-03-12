@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
@@ -13,6 +14,14 @@ namespace Gameplay
                 Debug.LogError("Father or Mother is null");
                 return null;
             }
+            GameObject newGameObject = new GameObject();
+            newGameObject.name = "Node" + Guid.NewGuid().ToString();
+            newGameObject.transform.position = Vector3.zero;
+            SpriteRenderer spriteRenderer = newGameObject.AddComponent<SpriteRenderer>();
+            newGameObject.AddComponent<CircleCollider2D>();
+            Node newNode = newGameObject.AddComponent<Node>();
+
+            newNode.bornOriginPoint = GteBornOriginPoint(father, mother);
             GraphicStyle[] newGraphicStyles = new GraphicStyle[3];
             for (int i = 0; i < 2; i++)
             {
@@ -28,7 +37,8 @@ namespace Gameplay
                 }
                 stringBuilder.Append(item.ToString());
             }
-            Node newNode = GameObject.Instantiate(ResouresLoader.Instance.GetPrefab(stringBuilder.ToString())).GetComponent<Node>();
+            spriteRenderer.sprite = ResouresLoader.Instance.GetTexture(stringBuilder.ToString());
+            newNode.audioClip = ResouresLoader.Instance.GetAudio(stringBuilder.ToString());
             for (int i = 0; i < 3; i++)
             {
                 newNode.graphicStyles[i] = newGraphicStyles[i];

@@ -18,34 +18,34 @@ public class ResouresLoader
             return instance;
         }
     }
-    private static Dictionary<string, GameObject> prefabs; 
+    private static Dictionary<string, Sprite> textures; 
     private static Dictionary<string, AudioClip> audios;
 
     private static void Initialize()
     {
-        prefabs = new Dictionary<string, GameObject>();
+        textures = new Dictionary<string, Sprite>();
         audios = new Dictionary<string, AudioClip>();
-        foreach (var item in Config.prefabsPath)
+        foreach (var item in Config.infoPath)
         {
-            if(item.Value.PrefabPath == null)  continue;
-            prefabs.Add(item.Key, Resources.Load<GameObject>(item.Value.PrefabPath));
+            if(item.Value.spritePath == null)  continue;
+            textures.Add(item.Key, Resources.Load<Sprite>(item.Value.spritePath));
         }
-        foreach (var item in Config.prefabsPath)
+        foreach (var item in Config.infoPath)
         {
-            if(item.Value.AudioPath == null)  continue;
-            audios.Add(item.Key, Resources.Load<AudioClip>(item.Value.AudioPath));
+            if(item.Value.audioPath == null)  continue;
+            audios.Add(item.Key, Resources.Load<AudioClip>(item.Value.audioPath));
         }
     }
 
-    public GameObject GetPrefab(string key)
+    public Sprite GetTexture(string key)
     {
-        if (prefabs.ContainsKey(key))
+        if (textures.ContainsKey(key))
         {
-            return prefabs[key];
+            return textures[key];
         }
         else
         {
-            Debug.LogError("Prefab not found: " + key);
+            Debug.LogError("Texture not found: " + key);
             return null;
         }
     }
